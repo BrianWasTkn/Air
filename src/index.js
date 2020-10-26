@@ -14,3 +14,10 @@ bot.dbl = dbl;
 
 require('./utils/handlers/command')(bot);
 require('./utils/handlers/event')(bot);
+
+dbl.webhook.on('vote', async (bot, vote) => {
+    const user = await bot.fetchUser(vote.user);
+
+    user.coinsInWallet += 4000;
+    await user.save();
+})
