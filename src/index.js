@@ -3,13 +3,13 @@ const { Collection } = require('discord.js');
 const MongoClient = require('./utils/MongoClient');
 const DBL = require("dblapi.js");
 const bot = new MongoClient();
-const http = require('http');
+/*const http = require('http');
 const express = require('express');
 
 const app = express();
-const server = http.createServer(app);
+const server = http.createServer(app);*/
 
-const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc1MjA2MTMyNDY4MjQ2MTI1NSIsImJvdCI6dHJ1ZSwiaWF0IjoxNjAzNzM1OTUzfQ.p4A4LAJ3BF-BxGBU_OYvpf7gg2e2w8ja9yuu_eDtahk', { webhookAuth: '69420gamersdashcruftgavcs', webhookServer: server }, bot);
+const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc1MjA2MTMyNDY4MjQ2MTI1NSIsImJvdCI6dHJ1ZSwiaWF0IjoxNjAzNzM1OTUzfQ.p4A4LAJ3BF-BxGBU_OYvpf7gg2e2w8ja9yuu_eDtahk', { webhookAuth: '69420gamersdashcruftgavcs', webhookPort: 5000 }, bot);
 
 bot.login(process.env.TOKEN);
 
