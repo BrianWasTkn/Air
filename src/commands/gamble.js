@@ -19,7 +19,7 @@ module.exports.run = async (bot, message, args) => {
         await userData.save();
         const wonEmbed = new MessageEmbed()
         .setColor('GREEN')
-        .setDescription(`Bot rolled: \`${botRoll}\`\nYou rolled: \`${userChoice}\`\nWin Rate: \`${Math.floor(userChoice-botRoll)*10}%\`\nYou won: \`${wonCoins.toLocaleString()}\` coins`)
+        .setDescription(`Bot rolled: \`${botRoll}\`\nYou rolled: \`${userChoice}\`\nWin Rate: \`${Math.round(userChoice-botRoll)*10}%\`\nYou won: \`${wonCoins.toLocaleString()}\` coins`)
         .setTitle('You Won!')
         message.channel.send(wonEmbed);
     } else if (botRoll == userChoice) {
@@ -36,7 +36,7 @@ module.exports.run = async (bot, message, args) => {
         await userData.save();
         const lostEmbed = new MessageEmbed()
         .setColor('RED')
-        .setDescription(`Bot rolled: \`${botRoll}\`\nYou rolled: \`${userChoice}\`\nLost Rate: \`${Math.floor(botRoll-userChoice)*10}%\`\nYou lost: \`${lostCoins.toLocaleString()}\` coins`)
+        .setDescription(`Bot rolled: \`${botRoll}\`\nYou rolled: \`${userChoice}\`\nLose Rate: \`${Math.round(botRoll-userChoice)*10}%\`\nYou lost: \`${lostCoins.toLocaleString()}\` coins`)
         .setTitle('You lost!')
         message.channel.send(lostEmbed);
     }
