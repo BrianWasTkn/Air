@@ -5,7 +5,7 @@ module.exports.run = async (bot, message, args) => {
         .setTitle(bot.user.tag)
         .setDescription(`Air is a fun economy bot with various Items and easy to use. 
     [Invite](https://discord.com/oauth2/authorize?client_id=752061324682461255&scope=bot&permissions=19456) Air to your server today!\nYou can also hangout in our [Discord Server](https://discord.gg/2KFYR86)`)
-        .setFooter(`Tip: you can vote our bot and gain 4,000 coins for free.`)
+        //.setFooter(`Tip: you can vote our bot and gain 4,000 coins for free.`)
         .setURL(`https://top.gg/bot/752061324682461255`)
         .setThumbnail(bot.user.displayAvatarURL({ format: 'png', size: 256, dynamic: true }))
         .setColor('#81bcfc')

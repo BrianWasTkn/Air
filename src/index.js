@@ -9,7 +9,7 @@ const express = require('express');
 const app = express();
 const server = http.createServer(app);*/
 
-const dbl = new DBL(process.env.TOPGGWEBHOOK, { webhookAuth: process.env.WEBHOOKAUTH, webhookPort: 5000 }, bot);
+const dbl = new DBL(process.env.TOPGGWEBHOOK, /*{ webhookAuth: process.env.WEBHOOKAUTH, webhookPort: 5000 },*/ bot);
 
 bot.login(process.env.TOKEN);
 
@@ -21,11 +21,11 @@ bot.dbl = dbl;
 require('./utils/handlers/command')(bot);
 require('./utils/handlers/event')(bot);
 
-dbl.webhook.on('vote', async (vote) => {
+/*dbl.webhook.on('vote', async (vote) => {
     const user = await bot.fetchUser(vote.user);
 
     console.log(user.coinsInWallet);
 
     user.coinsInWallet += 4000;
     await user.save();
-})
+})*/
