@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const prettyMilliseconds = require('pretty-ms');
 const prefix = 'air'
 module.exports = async (bot, message) => {
+    if (message.author.id != '521677874055479296') return;
     if (message.author.bot || message.channel.type === 'dm') return;
     if (message.content.toLowerCase().startsWith(prefix.toLowerCase())) {
         const messageArray = message.content.split(' ');

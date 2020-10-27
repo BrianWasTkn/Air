@@ -1,8 +1,25 @@
 const { MessageEmbed } = require('discord.js');
-
+const economy = require('../models/EconomyModel');
 module.exports.run = async (bot, message, args) => {
 
-    let array = [];
+    let data = await economy.find().sort([['coinsInWallet', 'descending']])
+    data = data.filter(x => message.guild.members.cache.get(x.userId) && message.guild.members.cache.get(x.userId).bot != true).slice(0, 6);
+    if (data.length == 0) return message.channel.send('No rich people in this server lmao'); 
+    
+    const emojis = [':first_place:', ':second_place:', ':third_place:'];
+    data = data.map((x, i) => `${emojis[i] || '🔹'} **${x.coinsInWallet.toLocaleString()}** - ${bot.users.cache.get(x.userId).tag || 'Unkown#0000'}`);
+
+    const embed = new MessageEmbed()
+        .setAuthor(`Richest people in ${message.guild.name}`)
+        .setDescription(`${data.join('\n')}`)
+        .setColor('RANDOM')
+        .setFooter('wish I had that much money');
+    message.channel.send(embed);
+
+
+
+
+    /*let array = [];
 
     const members = message.guild.members.cache.filter(member => !member.user.bot);
 
@@ -35,7 +52,7 @@ module.exports.run = async (bot, message, args) => {
         .setDescription(`${array.join('\n')}`)
         .setColor('RANDOM')
         .setFooter('wish I had that much money');
-    message.channel.send(embed);
+    message.channel.send(embed);*/
 }
 
 module.exports.config = {
