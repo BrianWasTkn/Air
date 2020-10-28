@@ -13,15 +13,25 @@ module.exports.run = async (bot, message, args) => {
 
             await data.save();
         } else {
-            const left = ((data.coinsInWallet + data.coinsInBank) - data.bankSpace);
 
-            data.coinsInWallet = left
-            data.coinsInBank += (data.coinsInWallet - left);
+            if ((data.coinsInWallet + data.coinsInBank) >= data.bankSpace) {
+                const left = (data.coinsInWallet + data.coinsInBank) - data.bankSpace;
 
-            await data.save();
+                message.channel.send(`Deposited **${(left + data.coinsInBank).toLocaleString()}** coins`);
 
-            message.channel.send(`Deposited **${(data.coinsInWallet - left).toLocaleString()}** coins`);
-        }   
+                data.coinsInWallet = left
+                data.coinsInBank += (data.coinsInWallet);
+
+                await data.save();
+            } else {
+                message.channel.send(`Deposited **${(data.coinsInWallet).toLocaleString()} coins`);
+
+                data.coinsInBank += data.coinsInWallet;
+                data.coinsInWallet = 0;
+
+                await data.save();
+            }
+        }
     } else {
         if (isNaN(args[0])) {
             return message.channel.send('That\'s not a number.');
