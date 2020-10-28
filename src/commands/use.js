@@ -21,7 +21,7 @@ module.exports.run = async (bot, message, args) => {
     
     if (item.keep == false) {
         if (founditem.amount === 1) {
-            user.items = user.items.filter(x => x.name.toLowerCase() != items.name.toLowerCase());
+            user.items = user.items.filter(x => x.name.toLowerCase() != item.name.toLowerCase());
             await user.save();
         }
         else {
