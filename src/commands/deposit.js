@@ -24,7 +24,7 @@ module.exports.run = async (bot, message, args) => {
 
                 await data.save();
             } else {
-                message.channel.send(`Deposited **${(data.coinsInWallet).toLocaleString()} coins`);
+                message.channel.send(`Deposited **${(data.coinsInWallet).toLocaleString()}** coins`);
 
                 data.coinsInBank += data.coinsInWallet;
                 data.coinsInWallet = 0;

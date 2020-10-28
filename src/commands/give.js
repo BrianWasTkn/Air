@@ -6,6 +6,9 @@ module.exports.run = async (bot, message, args) => {
     if (!member || !args[0]) {
         return message.channel.send(`Who are you giving the coins to?`);
     }
+
+    if (member.user.id == message.author.id) return message.channel.send(`Lol you can't give yourself coins u crazy.`);
+
     if (!args[1]) {
         return message.channel.send(`How much coins are you giving them?`);
     }
@@ -34,7 +37,7 @@ module.exports.run = async (bot, message, args) => {
 
         authorData.coinsInWallet = (authorData.coinsInWallet - parseInt(toGive));
         userData.coinsInWallet = (userData.coinsInWallet + parseInt(toGive));
-        
+
         await authorData.save();
         await userData.save();
 
