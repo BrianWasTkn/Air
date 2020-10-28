@@ -5,7 +5,7 @@ module.exports.run = async (bot, message, args) => {
     if (!member) {
         return message.channel.send("You think you can rob nobody?");
     }
-    const devs = ['521677874055479296', '515204641450098704'];
+    const devs = ['521677874055479296', '515204641450098704','404205935251292160'];
 
     if (devs.includes(member.user.id)) return message.channel.send(`You can't rob the bot devs lol.`);
     
