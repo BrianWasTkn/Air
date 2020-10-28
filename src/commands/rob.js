@@ -5,6 +5,10 @@ module.exports.run = async (bot, message, args) => {
     if (!member) {
         return message.channel.send("You think you can rob nobody?");
     }
+    const devs = ['521677874055479296', '515204641450098704'];
+
+    if (devs.includes(member.user.id)) return message.channel.send(`You can't rob the bot devs lol.`);
+    
     const robbedUser = await bot.fetchUser(member.id);
     if (robbedUser.passive == true) return message.channel.send(`Leave them alone... they are in passive mode`);
     if (robbedUser.coinsInWallet < 201) {
