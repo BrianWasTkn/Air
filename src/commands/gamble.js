@@ -1,5 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 module.exports.run = async (bot, message, args) => {
+    return message.channel.send(`:x: this command is temporarily unavailable.`);
     const botRoll = Math.floor(Math.random() * 13)+1;
     const userChoice = Math.floor(Math.random() * 13)+1;
     const userData = await bot.fetchUser(message.author.id);
@@ -23,7 +24,7 @@ module.exports.run = async (bot, message, args) => {
     }
     
     if (botRoll < userChoice) {
-        const wonCoins = (betAmount + (betAmount * (result / 10)));
+        const wonCoins = Math.round((betAmount / 1.2) + (betAmount * (result / 9)));
         userData.coinsInWallet += parseInt(wonCoins);
         await userData.save();
         const wonEmbed = new MessageEmbed()
