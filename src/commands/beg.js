@@ -3,7 +3,7 @@ module.exports.run = async (bot, message, args) => {
     if (another === 4) {
         return message.channel.send(`**DashCruft**: i'm too broke man sorry`);
     }
-    const random = Math.round(Math.random() * 400);
+    const random = Math.round(Math.random() * 200);
     const randomMessage = [
         `WOW **Elon Musk** gave you ${random.toLocaleString()} coins.`,
         `**Bill Gates** gave you ${random.toLocaleString()} coins.`,
@@ -12,6 +12,7 @@ module.exports.run = async (bot, message, args) => {
         `You looked inside your **stepsister's** drawer and found ${random.toLocaleString()} coins.`,
         `You asked your **dog** and he vomited ${random.toLocaleString()} coins.`,
         `You gave **DashCruft** free subscribers so he gave you ${random.toLocaleString()} coins.`,
+        `**Mama mia** gave you ${random.toLocaleString()} coins as a welcome to italy gift.`
     ];
     const response = randomMessage[Math.floor((Math.random() * randomMessage.length))];
     await message.reply(`${response}`)
