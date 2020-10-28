@@ -17,8 +17,6 @@ module.exports.run = async (bot, message, args) => {
     message.channel.send(embed);
 
 
-
-
     /*let array = [];
 
     const members = message.guild.members.cache.filter(member => !member.user.bot);
