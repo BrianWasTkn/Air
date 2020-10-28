@@ -59,7 +59,7 @@ module.exports.config = {
     usage: 'air rich', // Usage
     botPerms: [], // Bot permissions needed to run command. Leave empty if nothing.
     userPerms: [], // User permissions needed to run command. Leave empty if nothing.
-    aliases: [], // Aliases 
+    aliases: ['leader' , 'leaderboard '], // Aliases 
     bankSpace: 0, // Amount of bank space to give when command is used.
     cooldown: 10 // Command Cooldown
 }
