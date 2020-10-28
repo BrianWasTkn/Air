@@ -4,6 +4,7 @@ module.exports.run = async (bot, message, args) => {
     const userChoice = Math.floor(Math.random() * 13)+1;
     const userData = await bot.fetchUser(message.author.id);
     if (userData.passive == true) return message.channel.send(`You're in passive mode, turn it off to gamble`);
+    if (userData.coinsInWallet == 0) return message.channel.send(`You don't have any coins to bet.`);
     let betAmount = args[0];
     const result = userChoice-botRoll;
     if (!betAmount || isNaN(betAmount) && betAmount !== 'all' && betAmount !== 'max') return message.channel.send(`So how much coins are you gambling again?`);

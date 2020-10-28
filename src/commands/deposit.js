@@ -3,7 +3,7 @@ module.exports.run = async (bot, message, args) => {
 
     if (args.join(' ') === 'all') {
         if (data.coinsInWallet > data.bankSpace) {
-            const max_deposit = (data.coinsInWallet+data.coinsInBank-data.bankSpace);
+            const max_deposit = (data.coinsInWallet + data.coinsInBank - data.bankSpace);
 
             data.coinsInWallet = max_deposit;
 
@@ -13,12 +13,15 @@ module.exports.run = async (bot, message, args) => {
 
             await data.save();
         } else {
-            await message.channel.send(`Deposited **${data.bankSpace - data.coinsInBank}** coins.`);
-            data.coinsInWallet -= (data.bankSpace - data.coinsInBank);
-            data.coinsInBank += (data.bankSpace - data.coinsInBank);
+            const left = ((data.coinsInWallet + data.coinsInBank) - data.bankSpace);
+
+            data.coinsInWallet = left
+            data.coinsInBank += (data.coinsInWallet - left);
 
             await data.save();
-        }
+
+            message.channel.send(`Deposited **${(data.coinsInWallet - left).toLocaleString()}** coins`);
+        }   
     } else {
         if (isNaN(args[0])) {
             return message.channel.send('That\'s not a number.');

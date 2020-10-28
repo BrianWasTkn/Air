@@ -36,13 +36,18 @@ module.exports.run = async (bot, message, args) => {
         await user.save();
     }
     else {
-        array.push({
-            name: item.name,
-            amount: (founditem.amount - parseInt(sellAmount)),
-            description: item.description
-        });
-        user.items = array;
-        await user.save();
+        if (founditem.amount - parseInt(sellAmount) == 0) {
+            user.items = array;
+            await user.save();
+        } else {
+            array.push({
+                name: item.name,
+                amount: (founditem.amount - parseInt(sellAmount)),
+                description: item.description
+            });
+            user.items = array;
+            await user.save();
+        }
     }
     user.coinsInWallet += (item.sellAmount * parseInt(sellAmount));
     await user.save();

@@ -33,11 +33,9 @@ module.exports.run = async (bot, message, args) => {
         if (toGive > authorData.coinsInWallet) return message.reply(`You don't have that much coins`);
 
         authorData.coinsInWallet = (authorData.coinsInWallet - parseInt(toGive));
-
-        await authorData.save();
-
         userData.coinsInWallet = (userData.coinsInWallet + parseInt(toGive));
-
+        
+        await authorData.save();
         await userData.save();
 
         message.channel.send(`You gave ${member} **${parseInt(toGive).toLocaleString()}** coins`); //Change the message how u like
