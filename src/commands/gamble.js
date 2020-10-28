@@ -1,6 +1,5 @@
 const { MessageEmbed } = require("discord.js");
 module.exports.run = async (bot, message, args) => {
-    return message.channel.send(`:x: this command is temporarily unavailable.`);
     const botRoll = Math.floor(Math.random() * 13)+1;
     const userChoice = Math.floor(Math.random() * 13)+1;
     const userData = await bot.fetchUser(message.author.id);
@@ -14,7 +13,7 @@ module.exports.run = async (bot, message, args) => {
 
     if (!betAmount || isNaN(betAmount) && betAmount !== 'all' && betAmount !== 'max') return message.channel.send(`So how much coins are you gambling again?`);
     
-    if (betAmount < 200) return message.channel.send(`Sorry bud, you can only gamble \`200+\` coins`)
+    if (betAmount < 200) return message.channel.send(`Sorry bud, you can only gamble **200+** coins`)
     
     if (betAmount == 'all' || betAmount == 'max') betAmount=userData.coinsInWallet;
     else betAmount=parseInt(args[0]);
@@ -24,12 +23,12 @@ module.exports.run = async (bot, message, args) => {
     }
     
     if (botRoll < userChoice) {
-        const wonCoins = Math.round((betAmount / 1.2) + (betAmount * (result / 9)));
+        const wonCoins = Math.round(((Math.random() * userChoice) + betAmount / 4) * 1.1);
         userData.coinsInWallet += parseInt(wonCoins);
         await userData.save();
         const wonEmbed = new MessageEmbed()
         .setColor('GREEN')
-        .setDescription(`Bot rolled: \`${botRoll}\`\nYou rolled: \`${userChoice}\`\nWin Rate: \`${Math.round(userChoice-botRoll)*10}%\`\nYou won: \`${wonCoins.toLocaleString()}\` coins`)
+        .setDescription(`Bot rolled: **${botRoll}**\nYou rolled: **${userChoice}**\nWin Rate: **${Math.round(userChoice-botRoll)*10}%**\nYou won: **${wonCoins.toLocaleString()}** coins`)
         .setTitle('You Won!')
         message.channel.send(wonEmbed);
     } else if (botRoll == userChoice) {
@@ -37,7 +36,7 @@ module.exports.run = async (bot, message, args) => {
         await userData.save();
         const tieEmbed = new MessageEmbed()
         .setColor('YELLOW')
-        .setDescription(`Bot rolled: \`${botRoll}\`\nYou rolled: \`${userChoice}\`\nYou lost: \`${(betAmount/2).toLocaleString()}\``)
+        .setDescription(`Bot rolled: **${botRoll}**\nYou rolled: **${userChoice}**\nYou lost: **${(betAmount/2).toLocaleString()}**`)
         .setTitle('Its a tie!')
         message.channel.send(tieEmbed);
     } else if (botRoll > userChoice) {
@@ -46,7 +45,7 @@ module.exports.run = async (bot, message, args) => {
         await userData.save();
         const lostEmbed = new MessageEmbed()
         .setColor('RED')
-        .setDescription(`Bot rolled: \`${botRoll}\`\nYou rolled: \`${userChoice}\`\nLose Rate: \`${Math.round(botRoll-userChoice)*10}%\`\nYou lost: \`${lostCoins.toLocaleString()}\` coins`)
+        .setDescription(`Bot rolled: **${botRoll}**\nYou rolled: **${userChoice}**\nYou lost: **${lostCoins.toLocaleString()}** coins`)
         .setTitle('You lost!')
         message.channel.send(lostEmbed);
     }
