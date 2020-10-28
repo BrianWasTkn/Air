@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
             await data.save();
         } else {
 
-            if ((data.coinsInWallet + data.coinsInBank) >= data.bankSpace) {
+            if ((data.coinsInWallet + data.coinsInBank) > data.bankSpace) {
                 const left = (data.coinsInWallet + data.coinsInBank) - data.bankSpace;
 
                 message.channel.send(`Deposited **${(left + data.coinsInBank).toLocaleString()}** coins`);
