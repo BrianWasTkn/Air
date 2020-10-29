@@ -29,7 +29,6 @@ module.exports.run = async (bot, message, args) => {
             await target.save();
             msg.delete();
             message.channel.send(`Turns out **${memberPicked.user.tag}** Didn't have much coins so you end up paying them **${randomNumber}** coins...`);
-            return true;
         } else {
             author.coinsInWallet += randomNumber;
             target.coinsInWallet -= randomNumber;
@@ -38,9 +37,9 @@ module.exports.run = async (bot, message, args) => {
             await target.save();
             msg.delete();
             message.channel.send(`You hacked **${memberPicked.user.tag}** and gained **${randomNumber}** coins.`);
-            return true;
         }
     }, 5000);
+    return true;
 }
 
 module.exports.config = {
