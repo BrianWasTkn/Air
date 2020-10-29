@@ -11,7 +11,7 @@ module.exports.run = async (bot, message, args) => {
     const author = await bot.fetchUser(message.author.id);
     if (author.coinsInWallet < 200) return message.channel.send(`You need atleast **200** coins to use this command.`);
     if (message.guild.members.cache == undefined) return message.channel.send(`Seems like members here aren't cached.`);
-    if (message.guild.memberCount <= 2) return message.channel.send(`This server only has 2 members, this command isn't usable.`);
+    if (message.guild.memberCount < 5) return message.channel.send(`This server has less than 5 members, you can't use this command.`);
     const members = message.guild.members.cache.filter(x => x.user.id != message.author.id && !x.user.bot).array();
     const random = Math.floor(Math.random() * members.length);
     const memberPicked = members[random];
@@ -51,5 +51,5 @@ module.exports.config = {
     userPerms: [], // User permissions needed to run command. Leave empty if nothing.
     aliases: [], // Aliases 
     bankSpace: 5, // Amount of bank space to give when command is used.
-    cooldown: 300 // Command Cooldown
+    cooldown: 60 // Command Cooldown
 }
