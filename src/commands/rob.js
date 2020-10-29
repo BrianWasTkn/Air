@@ -26,7 +26,8 @@ module.exports.run = async (bot, message, args) => {
     } else {
         const random = Math.floor(Math.random() * 5);
         if (random === 3) {
-            return message.channel.send(`You tried to rob **${member.user.tag}** but got caught! Better luck next time.`);
+            message.channel.send(`You tried to rob **${member.user.tag}** but got caught! Better luck next time.`);
+            return true;
         }
     }
     let array = robbedUser.items.filter(x => x.name !== 'Wallet Lock');
@@ -36,7 +37,6 @@ module.exports.run = async (bot, message, args) => {
         if (walletLock.amount === 1) {
             robbedUser.items = array;
             await robbedUser.save();
-            return;
         }
         else {
             array.push({
@@ -46,8 +46,8 @@ module.exports.run = async (bot, message, args) => {
             });
             robbedUser.items = array;
             await robbedUser.save();
-            return;
         }
+        return true;
     }
     const randomAmount = Math.round(Math.random() * robbedUser.coinsInWallet);
     user.coinsInWallet += randomAmount;
@@ -55,7 +55,7 @@ module.exports.run = async (bot, message, args) => {
     await user.save();
     await robbedUser.save();
     message.channel.send(`:moneybag: You stole **${randomAmount.toLocaleString()}** coins from ${member}!`);
-
+    return true;
 }
 
 module.exports.config = {

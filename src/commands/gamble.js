@@ -9,8 +9,6 @@ module.exports.run = async (bot, message, args) => {
     
     let betAmount = args[0];
 
-    const result = userChoice-botRoll;
-
     if (!betAmount || isNaN(betAmount) && betAmount !== 'all' && betAmount !== 'max') return message.channel.send(`So how much coins are you gambling again?`);
     
     if (betAmount < 200) return message.channel.send(`Sorry bud, you can only gamble **200+** coins`)

@@ -36,7 +36,7 @@ module.exports = async (bot, message) => {
                 if (!command.config.userPerms) return console.log("You didn't provide userPerms.");
                 if (!Array.isArray(command.config.userPerms)) return console.log('userPerms must be an array.')
                 if (!message.guild.me.hasPermission(command.config.botPerms)) {
-                    const beauty = command.config.botPerms.join('\`, \`'); 
+                    const beauty = command.config.botPerms.join('\`, \`');
                     const noBotPerms = new Discord.MessageEmbed()
                         .setTitle('Missing Permissions')
                         .setDescription(`I am missing these permissions: \`${beauty}\`.`)
@@ -46,17 +46,26 @@ module.exports = async (bot, message) => {
                 if (!message.member.hasPermission(command.config.userPerms)) {
                     const beauty = command.config.userPerms.join('\`, \`');
                     const noUserPerms = new Discord.MessageEmbed()
-                    .setTitle('Missing Permissions')
-                    .setDescription(`You are missing these permissions: \`${beauty}\`.`)
-                    .setColor('RED');
+                        .setTitle('Missing Permissions')
+                        .setDescription(`You are missing these permissions: \`${beauty}\`.`)
+                        .setColor('RED');
                     return message.channel.send(noUserPerms)
                 }
                 if (command.config.bankSpace !== 0) {
                     bot.giveBankSpace(message.author.id, command.config.bankSpace);
                 }
-                await command.run(bot, message, args);
-                timestamps.set(message.author.id, now);
-                setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+
+                if (command.config.name == 'rob' || command.config.name == 'hack') {
+                    const res = await command.run(bot, message, args);
+                    if (res == true) {
+                        timestamps.set(message.author.id, now);
+                        setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+                    }
+                } else {
+                    await command.run(bot, message, args);
+                    timestamps.set(message.author.id, now);
+                    setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+                }
             }
         }
     }

@@ -10,9 +10,8 @@ module.exports.run = async (bot, message, args) => {
         `A **beggar** found ${random.toLocaleString()} coins for you.`,
         `**ur mom** found ${random.toLocaleString()} coins while cleaning the house.`,
         `You looked inside your **stepsister's** drawer and found ${random.toLocaleString()} coins.`,
-        `You asked your **dog** and he vomited ${random.toLocaleString()} coins.`,
+        //`You asked your **dog** and he vomited ${random.toLocaleString()} coins.`,
         `You gave **DashCruft** free subscribers so he gave you ${random.toLocaleString()} coins.`,
-        `**Mama mia** gave you ${random.toLocaleString()} coins as a welcome to italy gift.`
     ];
     const response = randomMessage[Math.floor((Math.random() * randomMessage.length))];
     await message.reply(`${response}`)
