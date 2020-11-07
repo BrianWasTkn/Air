@@ -9,12 +9,12 @@ const pm = require('pretty-ms');
 module.exports.run = async (bot, message, args) => {
     const statsEmbed = new MessageEmbed()
     .setAuthor(bot.user.tag, bot.user.displayAvatarURL())
-    .addField(`Cached Users`,`${bot.users.cache.size}`)
-    .addField(`Cached Servers`, `${bot.guilds.cache.size}`)
-    .addField(`Used Commands`, `${bot.commandsUsed.toLocaleString()}`)
-    .addField(`Uptime`,`${pm(bot.uptime)}`)
-    .addField(`Ping`,`${Math.floor(bot.ws.ping)}`)
-    .addField(`Developers`,`Gav#5315, Crazy Shooting#7097`)
+    .addField(`Cached Users`,`${bot.users.cache.size}`, true)
+    .addField(`Cached Servers`, `${bot.guilds.cache.size}`, true)
+    .addField(`Used Commands`, `${bot.commandsUsed.toLocaleString()}`, true)
+    .addField(`Uptime`,`${pm(bot.uptime)}`, true)
+    .addField(`Ping`,`${Math.floor(bot.ws.ping)}`, true)
+    .addField(`Developers`,`Gav#5315, Crazy Shooting#7097`, true)
     .setColor('#81bcfc')
     .setTimestamp()
     message.channel.send(statsEmbed);
