@@ -2,7 +2,7 @@ require('dotenv').config();
 const { Collection } = require('discord.js');
 const MongoClient = require('./utils/MongoClient');
 const DBL = require("dblapi.js");
-const bot = new MongoClient({ ws: { intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS'] }, fetchAllMembers: true });
+const bot = new MongoClient({ ws: { intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS'] }, fetchAllMembers: false });
 /*const http = require('http');
 const express = require('express');
 
