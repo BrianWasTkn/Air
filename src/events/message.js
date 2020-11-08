@@ -3,6 +3,7 @@ const prettyMilliseconds = require('pretty-ms');
 const prefix = 'air'
 module.exports = async (bot, message) => {
     if (message.content.toLowerCase() == "crazy shooting") await message.react('<:Madge:765856812624248852>');
+    else if (message.content.toLowerCase() == "air") await message.react('<:air:758393854029856799>');
     //if (message.author.id != '521677874055479296' && message.author.id != '515204641450098704' && message.author.id != '747401903268429874') return;
     if (message.author.bot || message.channel.type === 'dm') return;
     if (message.content.toLowerCase().startsWith(prefix.toLowerCase())) {
