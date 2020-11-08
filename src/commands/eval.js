@@ -21,7 +21,7 @@ module.exports.run = async (bot, message, args) => {
 
     const evalEmbed = new MessageEmbed()
     .addField(`Input`,`\`\`\`\`${code}\`\``)
-    .setAuthor(message.author.tag, message.author.diplayAvatarURL())
+    .setAuthor(message.author.tag, message.author.displayAvatarURL())
     .setTimestamp()
     .setFooter(`Evaled in ${pm(message.createdTimestamp - Date.now())}`)
 
