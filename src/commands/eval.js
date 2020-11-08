@@ -20,7 +20,7 @@ module.exports.run = async (bot, message, args) => {
     let output;
 
     const evalEmbed = new MessageEmbed()
-    .addField(`Input`,`\`\`\`\`${code}\`\``)
+    .addField(`Input`,`\`\`\`\`js\n${code}\`\`\``)
     .setAuthor(message.author.tag, message.author.displayAvatarURL())
     .setTimestamp()
     .setFooter(`Evaled in ${pm(Date.now() - message.createdTimestamp)}`)
@@ -30,10 +30,10 @@ module.exports.run = async (bot, message, args) => {
         output = evaled;
         if (typeof evaled != "string") output = require("util").inspect(evaled, { depth: 0 });
         if (output.length > 1970) output = output.slice(0, 1970);
-        evalEmbed.addField(`Output`,`\`\`\`js${output}\`\`\``);
+        evalEmbed.addField(`Output`,`\`\`\`js\n${output}\`\`\``);
     } catch (e) {
         output = e;
-        evalEmbed.addField(`Outpute`,`\`\`\`js${output}\`\`\``);
+        evalEmbed.addField(`Outpute`,`\`\`\`js\n${output}\`\`\``);
     }
 
     message.channel.send(evalEmbed);
