@@ -12,9 +12,9 @@ module.exports.run = async (bot, message, args) => {
 
     let code = args.join(' ');
 
-    if (!args[0]) message.reply(`Dude, Specify the code.`);
+    if (!args[0]) return message.channel.send(`Dude, Specify the code.`);
 
-    if (code.toLowerCase().includes("token") || code.toLowerCase().includes("process.env")) return message.reply(`Shut, no token for u.`);
+    if (code.toLowerCase().includes("token") || code.toLowerCase().includes("process.env")) return message.channel.send(`Shut, no token for u.`);
 
     let evaled;
     let output;
@@ -23,7 +23,7 @@ module.exports.run = async (bot, message, args) => {
     .addField(`Input`,`\`\`\`\`${code}\`\``)
     .setAuthor(message.author.tag, message.author.displayAvatarURL())
     .setTimestamp()
-    .setFooter(`Evaled in ${pm(message.createdTimestamp - Date.now())}`)
+    .setFooter(`Evaled in ${pm(Date.now() - message.createdTimestamp)}`)
 
     try {
         evaled = await eval(code);
