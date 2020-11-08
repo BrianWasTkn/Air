@@ -12,6 +12,8 @@ module.exports.run = async (bot, message, args) => {
 
     let code = args.join(' ');
 
+    if (!args[0]) message.reply(`Dude, Specify the code.`);
+
     if (code.toLowerCase().includes("token") || code.toLowerCase().includes("process.env")) return message.reply(`Shut, no token for u.`);
 
     let evaled;
