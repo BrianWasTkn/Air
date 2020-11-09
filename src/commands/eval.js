@@ -14,6 +14,10 @@ module.exports.run = async (bot, message, args) => {
 
     if (!args[0]) return message.channel.send(`Dude, Specify the code.`);
 
+    const nores = ["no-response","nores","noresponse","no-res","nr"];
+
+    if (nores.includes(args[0])) code = args.slice(1).join(' '); 
+
     if (code.toLowerCase().includes("token") || code.toLowerCase().includes("process.env")) return message.channel.send(`Shut, no token for u.`);
 
     let evaled;
@@ -35,7 +39,7 @@ module.exports.run = async (bot, message, args) => {
         output = e;
         evalEmbed.addField(`Outpute`,`\`\`\`js\n${output}\`\`\``);
     }
-
+    if (nores.includes(args[0])) return;    
     message.channel.send(evalEmbed);
 }
 module.exports.config = {
