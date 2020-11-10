@@ -13,7 +13,7 @@ module.exports.run = async (bot, message, args) => {
             .setColor('RANDOM');
         return message.channel.send(embed);
     }
-    let list = bot.commands.filter(x => x.config.name !== 'help' && x.config.name !== 'test');
+    let list = bot.commands.filter(x => x.config.name !== 'help' && x.config.name !== 'test' && x.config.name != "eval");
     list = list.map(x => `\`${x.config.name}\``);
     const embed = new MessageEmbed()
         .setTitle('Commands')
