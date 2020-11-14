@@ -7,6 +7,10 @@ module.exports = async (bot, message) => {
     //if (message.author.id != '521677874055479296' && message.author.id != '515204641450098704' && message.author.id != '747401903268429874') return;
     if (message.author.bot || message.channel.type === 'dm') return;
     if (message.content.toLowerCase().startsWith(prefix.toLowerCase())) {
+        const guildData = await bot.fetchGuild(message.guild.id);
+        if (guildData) {
+            if (!guildData.whitelistedChannels.includes(message.channel.id)) return;
+        }
         const messageArray = message.content.split(' ');
         const cmd = messageArray[1];
         const args = messageArray.slice(2);

@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Client } = require('discord.js');
 const mongoose = require('mongoose');
 const economy = require('../models/EconomyModel');
+const GuildConfig = require('../models/GuildConfig');
 const ItemManager = require('./ItemManager');
 
 class MongoClient extends Client {
@@ -99,6 +100,21 @@ class MongoClient extends Client {
         user.coinsInWallet += parseInt(amount);
         await user.save();
         return user;
+    }
+
+    async fetchGuild(guildID) {
+        const guild = this.guilds.cache.get(guildID);
+        if (!guild) return undefined;
+        const config = await GuildConfig.findOne({ guildId: guildID });
+        if (!config) {
+            const newConfig = new GuildConfig({
+                guildId: guildID
+            });
+            await newConfig.save();
+            return newConfig;
+        } else {
+            return config;
+        }
     }
 }
 
