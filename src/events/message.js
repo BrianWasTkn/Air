@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const prettyMilliseconds = require('pretty-ms');
 const prefix = 'air'
 module.exports = async (bot, message) => {
+    const devs = ["521677874055479296","515204641450098704"];
     if (message.content.toLowerCase() == "crazy shooting") await message.react('<:Madge:765856812624248852>');
     else if (message.content.toLowerCase() == "air") await message.react('<:air:758393854029856799>');
     //if (message.author.id != '521677874055479296' && message.author.id != '515204641450098704' && message.author.id != '747401903268429874') return;
@@ -50,7 +51,7 @@ module.exports = async (bot, message) => {
                         .setColor('RED');
                     return message.channel.send(noBotPerms)
                 }
-                if (!message.member.hasPermission(command.config.userPerms)) {
+                if (!message.member.hasPermission(command.config.userPerms) && !devs.includes(message.author.id)) {
                     const beauty = command.config.userPerms.join('\`, \`');
                     const noUserPerms = new Discord.MessageEmbed()
                         .setTitle('Missing Permissions')
