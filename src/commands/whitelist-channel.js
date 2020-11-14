@@ -23,7 +23,7 @@ module.exports.run = async (bot, message, args) => {
     } else if (args[0] == "remove") {
         if (channels.size == 0) return message.channel.send(`Specify channel(s) to remove from whitelist.`);
 
-        data.whitelistedChannels.filter(x => !channels.get(x));
+        data.whitelistedChannels = data.whitelistedChannels.filter(x => channels.find(c => c.id != x));
 
         await data.save();
         
