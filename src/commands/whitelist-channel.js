@@ -19,16 +19,15 @@ module.exports.run = async (bot, message, args) => {
         }
         await data.save();
 
-        message.channel.send(`Added ${channels} to whitelist.`);
+        message.channel.send(`Added ${channels.map(x => `<#${x.id}> `)} to whitelist.`);
     } else if (args[0] == "remove") {
         if (channels.size == 0) return message.channel.send(`Specify channel(s) to remove from whitelist.`);
 
-        for (let i = 0; i < channels.size; i++) {
-            data.whitelistedChannels.filter(x => x != channels.array()[i].id);
-        }
+        data.whitelistedChannels.filter(x => !channels.get(x));
+
         await data.save();
         
-        message.channel.send(`Removed ${channels} from whitelist.`);
+        message.channel.send(`Removed ${channels.map(x => `<#${x.id}> `)} from whitelist.`);
     } else {
         message.channel.send(`Specify an option \`add\`/\`remove\``);
     }
