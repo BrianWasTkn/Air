@@ -9,7 +9,7 @@ module.exports = async (bot, message) => {
     if (message.content.toLowerCase().startsWith(prefix.toLowerCase())) {
         const guildData = await bot.fetchGuild(message.guild.id);
         if (guildData) {
-            if (!guildData.whitelistedChannels.includes(message.channel.id)) return;
+            if (!guildData.whitelistedChannels.includes(message.channel.id) && guildData.whitelistedChannels.length > 0) return;
         }
         const messageArray = message.content.split(' ');
         const cmd = messageArray[1];
