@@ -24,7 +24,6 @@ module.exports.run = async (bot, message, args) => {
         if (channels.size == 0) return message.channel.send(`Specify channel(s) to remove from whitelist.`);
 
         data.whitelistedChannels = data.whitelistedChannels.filter(x => channels.find(c => c.id != x));
-
         await data.save();
         
         message.channel.send(`Removed ${channels.map(x => `<#${x.id}> `)} from whitelist.`);
