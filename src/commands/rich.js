@@ -1,8 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const economy = require('../models/EconomyModel');
 module.exports.run = async (bot, message, args) => {
-
-    let data = await economy.find().sort([['coinsInWallet', 'descending']])
+    let data = await economy.find().sort([['coinsInWallet', 'descending']]).limit(6);
     data = data.filter(x => message.guild.members.cache.get(x.userId) && message.guild.members.cache.get(x.userId).bot != true).slice(0, 6);
     if (data.length == 0) return message.channel.send('No rich people in this server lmao'); 
     
